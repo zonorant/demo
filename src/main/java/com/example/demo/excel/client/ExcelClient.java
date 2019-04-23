@@ -30,28 +30,35 @@ public class ExcelClient {
 
     }
 
-    public <T> void export(String fileName, List<T> datasource, HttpServletResponse response, String workbookName) throws Exception {
+    private <T> void createWorkbook(String fileName, List<T> datasource, HttpServletResponse response,
+        String workbookName) throws Exception {
         WorkbookResolver resolver = this.manager.getResolver();
         MetaHandler<T> metaHandler = new MetaHandler(datasource.get(0).getClass());
         HSSFWorkbook wb = resolver.resolverWorkBook(datasource, metaHandler, workbookName, this.manager.getTitleStyleAdapter(), this.manager.getSimpleStyleAdapter());
         response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment;filename=" + new String(fileName.getBytes("utf-8"), "ISO8859-1") + ".xls");
+        response.setHeader("Content-disposition", "attachment;filename=" + new String(fileName.getBytes("utf-8"),
+            "ISO8859-1") + ".xls");
         OutputStream ouputStream = response.getOutputStream();
         wb.write(ouputStream);
         ouputStream.flush();
         ouputStream.close();
     }
 
+    public <T> void export(String fileName, List<T> datasource, HttpServletResponse response, String workbookName) throws Exception {
+        createWorkbook(fileName, datasource, response, workbookName);
+    }
+
     public <T> void export(String fileName, List<T> datasource, HttpServletResponse response) throws Exception {
-        WorkbookResolver resolver = this.manager.getResolver();
-        MetaHandler<T> metaHandler = new MetaHandler(datasource.get(0).getClass());
-        HSSFWorkbook wb = resolver.resolverWorkBook(datasource, metaHandler, this.manager.getTitleStyleAdapter(), this.manager.getSimpleStyleAdapter());
-        response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-disposition", "attachment;filename=" + new String(fileName.getBytes("utf-8"), "ISO8859-1") + ".xls");
-        OutputStream ouputStream = response.getOutputStream();
-        wb.write(ouputStream);
-        ouputStream.flush();
-        ouputStream.close();
+        createWorkbook(fileName, datasource, response, null);
+        //WorkbookResolver resolver = this.manager.getResolver();
+        //MetaHandler<T> metaHandler = new MetaHandler(datasource.get(0).getClass());
+        //HSSFWorkbook wb = resolver.resolverWorkBook(datasource, metaHandler, this.manager.getTitleStyleAdapter(), this.manager.getSimpleStyleAdapter());
+        //response.setContentType("application/vnd.ms-excel");
+        //response.setHeader("Content-disposition", "attachment;filename=" + new String(fileName.getBytes("utf-8"), "ISO8859-1") + ".xls");
+        //OutputStream ouputStream = response.getOutputStream();
+        //wb.write(ouputStream);
+        //ouputStream.flush();
+        //ouputStream.close();
     }
 
     public <T> HSSFWorkbook export(List<T> datasource) throws Exception {

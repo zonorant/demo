@@ -49,6 +49,6 @@ public class DefaultWorkBookResolver implements WorkbookResolver {
 
     @Override
     public <T> HSSFWorkbook resolverWorkBook(List<T> dataSource, MetaHandler<T> handler, CellStyleHandlerAdapter titleStyleAdapter, CellStyleHandlerAdapter simpleStyleAdapter) throws Exception {
-        return null;
+        return resolverWorkBook(dataSource, handler, null, titleStyleAdapter, simpleStyleAdapter);
     }
 }
