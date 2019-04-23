@@ -3,6 +3,7 @@ package com.example.demo.excel.client;
 import com.example.demo.excel.handler.MetaHandler;
 import com.example.demo.excel.resolver.WorkbookResolver;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
@@ -34,7 +35,7 @@ public class ExcelClient {
         String workbookName) throws Exception {
         WorkbookResolver resolver = this.manager.getResolver();
         MetaHandler<T> metaHandler = new MetaHandler(datasource.get(0).getClass());
-        HSSFWorkbook wb = resolver.resolverWorkBook(datasource, metaHandler, workbookName, this.manager.getTitleStyleAdapter(), this.manager.getSimpleStyleAdapter());
+        Workbook wb = resolver.resolverWorkBook(datasource, metaHandler, workbookName, this.manager.getTitleStyleAdapter(), this.manager.getSimpleStyleAdapter());
         response.setContentType("application/vnd.ms-excel");
         response.setHeader("Content-disposition", "attachment;filename=" + new String(fileName.getBytes("utf-8"),
             "ISO8859-1") + ".xls");
@@ -61,10 +62,11 @@ public class ExcelClient {
         //ouputStream.close();
     }
 
-    public <T> HSSFWorkbook export(List<T> datasource) throws Exception {
+    public <T> Workbook export(List<T> datasource) throws Exception {
         WorkbookResolver resolver = this.manager.getResolver();
         MetaHandler<T> metaHandler = new MetaHandler(datasource.get(0).getClass());
-        HSSFWorkbook wb = resolver.resolverWorkBook(datasource, metaHandler, this.manager.getTitleStyleAdapter(), this.manager.getSimpleStyleAdapter());
+        Workbook wb = resolver.resolverWorkBook(datasource, metaHandler, this.manager.getTitleStyleAdapter(),
+            this.manager.getSimpleStyleAdapter());
         return wb;
     }
 }
