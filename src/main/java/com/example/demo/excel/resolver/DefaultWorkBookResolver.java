@@ -1,6 +1,6 @@
 package com.example.demo.excel.resolver;
 
-import com.example.demo.client.SortableField;
+import com.example.demo.excel.client.SortableField;
 import com.example.demo.excel.adapter.CellStyleHandlerAdapter;
 import com.example.demo.excel.handler.MetaHandler;
 import org.apache.commons.beanutils.BeanUtils;
