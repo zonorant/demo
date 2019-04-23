@@ -1,8 +1,8 @@
 package com.example.demo.excel.client;
 
-import com.example.demo.excel.annotation.FieldMeta;
-
 import java.lang.reflect.Field;
+
+import com.example.demo.excel.annotation.FieldMeta;
 
 public class SortableField {
     private FieldMeta meta;
