@@ -6,7 +6,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 
-public class CellTitleStyleHandlerAdapter implements CellStyleHandlerAdapter {
+public class CellTitleStyleHandlerAdapter implements CellStyleHandlerAdapter<HSSFWorkbook> {
 
     @Override
     public HSSFCellStyle styleSettings(HSSFWorkbook workbook) {
