@@ -15,7 +15,6 @@ public class AppBeanConfig {
     @Bean
     public SimpleCacheManager simpleCacheManager() {
         SimpleCacheManager simpleCacheManager = new SimpleCacheManager();
-
         Set<Cache> caches = new HashSet<>();
         caches.add(new MyCache());
         simpleCacheManager.setCaches(caches);

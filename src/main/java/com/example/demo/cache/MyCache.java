@@ -20,6 +20,11 @@ public class MyCache implements Cache {
 
     @Override
     public ValueWrapper get(Object o) {
+        if (!(o instanceof BasicCacheKey)) {
+            throw new RuntimeException("is not legal param");
+        }
+
+
         return null;
     }
 
